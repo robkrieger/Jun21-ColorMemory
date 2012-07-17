@@ -1,0 +1,251 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf470
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green116\blue0;\red100\green56\blue32;\red196\green26\blue22;
+\red170\green13\blue145;\red92\green38\blue153;\red46\green13\blue110;\red28\green0\blue207;}
+\margl1440\margr1440\vieww9980\viewh16720\viewkind0
+\deftab640
+\pard\tx640\pardeftab640\pardirnatural
+
+\f0\fs26 \cf2 \CocoaLigature0 //\cf0 \
+\cf2 //  View.m\cf0 \
+\cf2 //  ColorMemory\cf0 \
+\cf2 //\cf0 \
+\cf2 //  Created by admin on 7/13/12.\cf0 \
+\cf2 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.\cf0 \
+\cf2 //\cf0 \
+\
+\cf3 #import \cf4 "View.h"\cf3 \
+\cf2 // #include <stdlib.h>\cf0 \
+\
+\cf5 @implementation\cf0  View\
+\
+- (\cf5 id\cf0 )initWithFrame:(\cf6 CGRect\cf0 )frame\
+\{\
+    \cf5 self\cf0  = [\cf5 super\cf0  \cf7 initWithFrame\cf0 :frame];\
+    \cf5 if\cf0  (\cf5 self\cf0 ) \{\
+        \cf2 // Initialization code\cf0 \
+        \cf5 self\cf0 .\cf6 backgroundColor\cf0  = [\cf6 UIColor\cf0  \cf7 colorWithRed\cf0 :\cf8 0.0\cf0  \cf7 green\cf0 :\cf8 0.0\cf0  \cf7 blue\cf0 :\cf8 0.0\cf0  \cf7 alpha\cf0 :\cf8 1.0\cf0 ];\
+        \
+    \}\
+    \cf5 return\cf0  \cf5 self\cf0 ;\
+\}\
+\
+\
+\cf2 // Only override drawRect: if you perform custom drawing.\cf0 \
+\cf2 // An empty implementation adversely affects performance during animation.\cf0 \
+- (\cf5 void\cf0 )drawRect:(\cf6 CGRect\cf0 )rect\
+\{\
+    \cf2 // Drawing code\cf0 \
+    \cf6 CGFloat\cf0  w = \cf5 self\cf0 .\cf6 bounds\cf0 .\cf6 size\cf0 .\cf6 width\cf0 ;\
+    \cf7 NSLog\cf0 (\cf4 @"w = %f"\cf0 , \cf5 self\cf0 .\cf6 bounds\cf0 .\cf6 size\cf0 .\cf6 width\cf0 ); \cf2 // 320\cf0 \
+    \cf6 CGFloat\cf0  h = \cf5 self\cf0 .\cf6 bounds\cf0 .\cf6 size\cf0 .\cf6 height\cf0 ;\
+    \cf7 NSLog\cf0 (\cf4 @"h = %f"\cf0 , \cf5 self\cf0 .\cf6 bounds\cf0 .\cf6 size\cf0 .\cf6 height\cf0 ); \cf2 // 460\cf0 \
+    \cf6 CGContextRef\cf0  c = \cf7 UIGraphicsGetCurrentContext\cf0 ();\
+    \
+    \cf2 // CGRectMake ( CGFloat x, CGFloat y, CGFloat width, CGFloat height );\cf0 \
+    \cf7 CGContextBeginPath\cf0 (c); \
+    \cf7 CGContextAddRect\cf0 (c, \cf7 CGRectMake\cf0 (w/\cf8 4\cf0 , h/\cf8 4\cf0 , \cf8 2\cf0 *(w/\cf8 4\cf0 ), \cf8 2\cf0 * (h/\cf8 4\cf0 )));\
+    \
+    \cf2 // int rand = arc4random() % 100;\cf0 \
+    \cf2 // (CGContextRef c, CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha );\cf0 \
+    \cf7 CGContextSetRGBFillColor\cf0 (c, \cf8 1.0\cf0 , \cf8 1.0\cf0 , \cf8 1.0\cf0 , \cf8 1.0\cf0 );\
+    \cf7 CGContextFillPath\cf0 (c);\
+    \
+    \
+    \
+    \cf2 // 1. Create an array and assign each quad to an index\cf0 \
+    \cf2 // 2. Give Q1 a random number \cf0 \
+    \cf2 // 3. Have the number change the color for Q1\cf0 \
+    \cf2 // 4. Give Q2, Q3, Q4 random numbers and... \cf0 \
+    \cf2 // 5. Assign a color to each based on the random number \cf0 \
+    \
+    \cf2 // NSMutableArray *quad = [NSMutableArray array]; \cf0 \
+    \
+    \cf2 /*\
+     for (int i = 0; i < 4; i++) \{  \
+     float rand = (arc4random() % 100)/(float)100;\
+     NSLog(@"Random Number %i = %f", i, rand); \
+     \}\
+     */\cf0 \
+    \
+    \
+    NSArray *colorset; \
+    \
+    \cf5 float\cf0  red = (\cf7 arc4random\cf0 () % \cf8 100\cf0 )/(\cf5 float\cf0 )\cf8 100\cf0 ;\
+    \cf6 NSNumber\cf0  *n0 = [\cf6 NSNumber\cf0  \cf7 numberWithFloat\cf0 :red];\
+    \
+    \cf5 float\cf0  green = (\cf7 arc4random\cf0 () % \cf8 100\cf0 )/(\cf5 float\cf0 )\cf8 100\cf0 ;\
+    \cf6 NSNumber\cf0  *n1 = [\cf6 NSNumber\cf0  \cf7 numberWithFloat\cf0 :green];\
+    \
+    \cf5 float\cf0  blue = (\cf7 arc4random\cf0 () % \cf8 100\cf0 )/(\cf5 float\cf0 )\cf8 100\cf0 ;\
+    \cf6 NSNumber\cf0  *n2 = [\cf6 NSNumber\cf0  \cf7 numberWithFloat\cf0 :blue];\
+    \
+    \cf5 float\cf0  alpha = (\cf7 arc4random\cf0 () % \cf8 100\cf0 )/(\cf5 float\cf0 )\cf8 100\cf0 ;\
+    \cf6 NSNumber\cf0  *n3 = [\cf6 NSNumber\cf0  \cf7 numberWithFloat\cf0 :alpha];\
+    \
+    colorset = [\cf6 NSArray\cf0  \cf7 arrayWithObjects\cf0 :n0, n1, n2, n3, \cf5 nil\cf0 ]; \
+    \
+    \cf5 for\cf0  (\cf6 NSNumber\cf0  *n \cf5 in\cf0  colorset) \{ \
+        \cf7 NSLog\cf0 (\cf4 @"List of floats: %@"\cf0 , n); \
+    \}\
+    \
+    \cf2 // Convert them back to CGFloat so they work with CGContextRGBFillColor\cf0 \
+    \cf6 CGFloat\cf0  r = [n0 \cf7 floatValue\cf0 ]; \
+    \cf6 CGFloat\cf0  g = [n1 \cf7 floatValue\cf0 ]; \
+    \cf6 CGFloat\cf0  b = [n2 \cf7 floatValue\cf0 ]; \
+    \cf6 CGFloat\cf0  a = [n3 \cf7 floatValue\cf0 ]; \
+    \
+    \
+    \cf2 // RANDOM 2\cf0 \
+    \
+    \cf6 CGFloat\cf0  r2 = (\cf7 arc4random\cf0 () % \cf8 100\cf0 )/(\cf5 float\cf0 )\cf8 100\cf0 ;\
+    \cf6 CGFloat\cf0  g2 = (\cf7 arc4random\cf0 () % \cf8 100\cf0 )/(\cf5 float\cf0 )\cf8 100\cf0 ;\
+    \cf6 CGFloat\cf0  b2 = (\cf7 arc4random\cf0 () % \cf8 100\cf0 )/(\cf5 float\cf0 )\cf8 100\cf0 ;\
+    \cf6 CGFloat\cf0  a2 = (\cf7 arc4random\cf0 () % \cf8 100\cf0 )/(\cf5 float\cf0 )\cf8 100\cf0 ;\
+    \
+    \cf5 int\cf0  quadmatch = \cf7 arc4random\cf0 () % \cf8 3\cf0 ; \cf2 // 0, 1, or 2\cf0 \
+    \cf7 NSLog\cf0 (\cf4 @"quadmatch = %i"\cf0 , quadmatch); \
+    \
+    \
+    \cf2 // pick a second random color\cf0 \
+    \cf2 // Put a random into the first one\cf0 \
+    \cf2 // Pick a random number 2, 3, or 4\cf0 \
+    \cf2 // Based on random number, set X2 = one of the w/2, w/4, or w/4*2 \cf0 \
+    \cf2 // Set Y2 = h/4, h/4*2, or h/4*2\cf0 \
+    \cf2 // if random = 2, do this, else do something else \cf0 \
+    \cf2 // Set X3 = one of the non-random ones that you've picked\cf0 \
+    \cf2 // Set Y3 = one of the non-random ones that you've picked\cf0 \
+    \cf2 // Set X4 = one of the non-random ones that you've picked\cf0 \
+    \cf2 // Set Y4 = one of the non-random ones that you've picked\cf0 \
+    \
+    \
+    \cf2 // QUADS: \cf0 \
+    \
+    \cf2 // Quad I (top left)\cf0 \
+    \cf2 // CGRectMake ( CGFloat x, CGFloat y, CGFloat width, CGFloat height );\cf0 \
+    \cf7 CGContextBeginPath\cf0 (c); \
+    \cf7 CGContextAddRect\cf0 (c, \cf7 CGRectMake\cf0 (w/\cf8 4\cf0 , h/\cf8 4\cf0 , (w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )));\
+    \cf2 // int rand = arc4random() % 100;\cf0 \
+    \cf2 // (CGContextRef c, CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha);\cf0 \
+    \cf7 CGContextSetRGBFillColor\cf0 (c, r, g, b, a);\
+    \cf7 CGContextFillPath\cf0 (c);\
+    \
+    \cf5 if\cf0  (quadmatch == \cf8 0\cf0 ) \{ \
+     \
+        \cf2 // Quad II (top right)\cf0 \
+        \cf7 CGContextBeginPath\cf0 (c); \
+        \cf7 CGContextAddRect\cf0 (c, \cf7 CGRectMake\cf0 (w/\cf8 2\cf0 , h/\cf8 4\cf0 , (w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )));\
+         \
+        \cf2 // if (quadmatch == 0) \{ \cf0 \
+              \
+        \cf2 // int rand = arc4random() % 100;\cf0 \
+        \cf2 // (CGContextRef c, CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha );\cf0 \
+        \cf7 CGContextSetRGBFillColor\cf0 (c, r, g, b, a);\
+          \
+        \cf2 /*\
+         \} else if \{ \
+             (quadmatch == 1) \
+             CGContextSetRGBFillColor(c, r2, g2, b2, a2);\
+         \} else if \{ \
+             (quadmatch == 2) \
+             CGContextSetRGBFillColor(c2, r2, g2, b2, a2);\
+         \}\
+         */\cf0 \
+    \
+        \cf7 CGContextFillPath\cf0 (c);\
+        \
+        \
+        \cf2 // Quad III (bottom left)\cf0 \
+        \cf7 CGContextBeginPath\cf0 (c); \
+        \cf7 CGContextAddRect\cf0 (c, \cf7 CGRectMake\cf0 ((w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )*\cf8 2\cf0 , (w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )));\
+        \cf2 // int rand = arc4random() % 100;\cf0 \
+        \cf2 // (CGContextRef c, CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha );\cf0 \
+        \cf7 CGContextSetRGBFillColor\cf0 (c, r2, g2, b2, a2);\
+        \cf7 CGContextFillPath\cf0 (c);\
+        \
+        \
+        \cf2 // Quad IV (bottom right)\cf0 \
+        \cf7 CGContextBeginPath\cf0 (c); \
+        \cf7 CGContextAddRect\cf0 (c, \cf7 CGRectMake\cf0 ((w/\cf8 4\cf0 )*\cf8 2\cf0 , (h/\cf8 4\cf0 )*\cf8 2\cf0 , (w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )));\
+        \cf2 // int rand = arc4random() % 100;\cf0 \
+        \cf2 // (CGContextRef c, CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha );\cf0 \
+        \cf7 CGContextSetRGBFillColor\cf0 (c, r2, g2, b2, a2);\
+        \cf7 CGContextFillPath\cf0 (c);\
+        \
+    \}\
+    \
+    \cf2 // 2\cf0 \
+    \
+    \cf5 else\cf0  \cf5 if\cf0  (quadmatch == \cf8 1\cf0 ) \{\
+        \
+        \cf2 // Quad II (top right)\cf0 \
+        \cf7 CGContextBeginPath\cf0 (c); \
+        \cf7 CGContextAddRect\cf0 (c, \cf7 CGRectMake\cf0 (w/\cf8 2\cf0 , h/\cf8 4\cf0 , (w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )));\
+        \cf2 // int rand = arc4random() % 100;\cf0 \
+        \cf2 // (CGContextRef c, CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha );\cf0 \
+        \cf7 CGContextSetRGBFillColor\cf0 (c, r2, g2, b2, a2);\
+        \cf7 CGContextFillPath\cf0 (c);\
+        \
+        \
+        \cf2 // Quad III (bottom left)\cf0 \
+        \cf7 CGContextBeginPath\cf0 (c); \
+        \cf7 CGContextAddRect\cf0 (c, \cf7 CGRectMake\cf0 ((w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )*\cf8 2\cf0 , (w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )));\
+        \cf2 // int rand = arc4random() % 100;\cf0 \
+        \cf2 // (CGContextRef c, CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha );\cf0 \
+        \cf7 CGContextSetRGBFillColor\cf0 (c, r, g, b, a);\
+        \cf7 CGContextFillPath\cf0 (c);\
+        \
+        \
+        \cf2 // Quad IV (bottom right)\cf0 \
+        \cf7 CGContextBeginPath\cf0 (c); \
+        \cf7 CGContextAddRect\cf0 (c, \cf7 CGRectMake\cf0 ((w/\cf8 4\cf0 )*\cf8 2\cf0 , (h/\cf8 4\cf0 )*\cf8 2\cf0 , (w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )));\
+        \cf2 // int rand = arc4random() % 100;\cf0 \
+        \cf2 // (CGContextRef c, CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha );\cf0 \
+        \cf7 CGContextSetRGBFillColor\cf0 (c, r2, g2, b2, a2);\
+        \cf7 CGContextFillPath\cf0 (c);\
+        \
+    \}\
+    \
+    \
+    \cf2 // 3\cf0 \
+    \
+    \cf5 else\cf0  \cf5 if\cf0  (quadmatch == \cf8 2\cf0 ) \{\
+        \
+        \cf2 // Quad II (top right)\cf0 \
+        \cf7 CGContextBeginPath\cf0 (c); \
+        \cf7 CGContextAddRect\cf0 (c, \cf7 CGRectMake\cf0 (w/\cf8 2\cf0 , h/\cf8 4\cf0 , (w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )));\
+        \cf2 // int rand = arc4random() % 100;\cf0 \
+        \cf2 // (CGContextRef c, CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha );\cf0 \
+        \cf7 CGContextSetRGBFillColor\cf0 (c, r2, g2, b2, a2);\
+        \cf7 CGContextFillPath\cf0 (c);\
+        \
+        \
+        \cf2 // Quad III (bottom left)\cf0 \
+        \cf7 CGContextBeginPath\cf0 (c); \
+        \cf7 CGContextAddRect\cf0 (c, \cf7 CGRectMake\cf0 ((w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )*\cf8 2\cf0 , (w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )));\
+        \cf2 // int rand = arc4random() % 100;\cf0 \
+        \cf2 // (CGContextRef c, CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha );\cf0 \
+        \cf7 CGContextSetRGBFillColor\cf0 (c, r2, g2, b2, a2);\
+        \cf7 CGContextFillPath\cf0 (c);\
+        \
+        \
+        \cf2 // Quad IV (bottom right)\cf0 \
+        \cf7 CGContextBeginPath\cf0 (c); \
+        \cf7 CGContextAddRect\cf0 (c, \cf7 CGRectMake\cf0 ((w/\cf8 4\cf0 )*\cf8 2\cf0 , (h/\cf8 4\cf0 )*\cf8 2\cf0 , (w/\cf8 4\cf0 ), (h/\cf8 4\cf0 )));\
+        \cf2 // int rand = arc4random() % 100;\cf0 \
+        \cf2 // (CGContextRef c, CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha );\cf0 \
+        \cf7 CGContextSetRGBFillColor\cf0 (c, r, g, b, a);\
+        \cf7 CGContextFillPath\cf0 (c);\
+        \
+    \}    \
+    \
+    \
+    \cf2 /* RESTART BUTTON\
+     // [self performSelector: @selector(setNeedsDisplay) withObject: nil afterDelay:2.0];\
+     */\cf0 \
+    \
+\}\
+\
+\
+\cf5 @end\cf0 \
+}
